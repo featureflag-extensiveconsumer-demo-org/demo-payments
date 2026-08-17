@@ -11,10 +11,11 @@ import (
 	"github.com/launchdarkly/go-sdk-common/v3/ldcontext"
 	"github.com/launchdarkly/go-sdk-common/v3/ldvalue"
 	ld "github.com/launchdarkly/go-server-sdk/v7"
+	"github.com/launchdarkly/go-server-sdk/v7/interfaces"
 )
 
 const repository = "demo-payments"
-const release = "v001"
+const release = "v002"
 
 var flags = []string{"demo-checkout-rollout", "demo-fraud-screening", "demo-payment-retry"}
 
@@ -137,7 +138,8 @@ func main() {
 		default:
 		}
 		openedAt := time.Now()
-		client, err := ld.MakeCustomClient(sdkKey, ld.Config{}, 10*time.Second)
+		config := ld.Config{ApplicationInfo: interfaces.ApplicationInfo{ApplicationID: repository, ApplicationVersion: release}}
+		client, err := ld.MakeCustomClient(sdkKey, config, 10*time.Second)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "Error: evaluator failed.")
 			os.Exit(1)
