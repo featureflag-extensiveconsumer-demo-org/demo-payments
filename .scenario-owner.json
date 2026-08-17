@@ -2,5 +2,5 @@
   "scenarioId": "campaign-2026-08-16",
   "service": "demo-payments",
   "template": "go",
-  "release": "v001"
+  "release": "v002"
 }
